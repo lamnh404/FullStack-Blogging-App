@@ -144,16 +144,16 @@ resource "aws_eks_node_group" "eks_node_group" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = "eks-node-group"
   node_role_arn   = aws_iam_role.eks_node_group_role.arn
-  subnet_ids      = aws_subnet.eks_subnet[*].id
+  subnet_ids      = module.vpc.private_subnets
   scaling_config {
-    desired_size = 3
+    desired_size = 2
     max_size     = 3
-    min_size     = 3
+    min_size     = 1
   }
-  instance_types = ["t2.large"]
+  instance_types = ["t3.medium"]
   remote_access {
     ec2_ssh_key = var.ssh_key_name
-    source_security_group_ids = [aws_security_group.eks_node_sg.id]
+    source_security_group_ids = [aws_security_group.node_sg.id]
   }
 }
 

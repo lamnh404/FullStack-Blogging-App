@@ -1,0 +1,8 @@
+target/
+.vscode/
+.idea/
+
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/.terraform.tfstate.lock.*
+terraform/.terraform.lock.*
